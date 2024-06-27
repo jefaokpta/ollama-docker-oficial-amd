@@ -1,13 +1,13 @@
 services:
-  # ollama:
-  #   build: .
-  #   ports:
-  #     - "11434:11434" # apagar em producao
-  #   volumes:
-  #     - ./ollama:/root/.ollama
-  #   devices:
-  #     - /dev/kfd
-  #     - /dev/dri
+  ollama:
+    image: ollama/ollama:0.1.47-rocm
+    ports:
+      - "11434:11434" # apagar em producao
+    volumes:
+      - ./ollama:/root/.ollama
+    devices:
+      - /dev/kfd
+      - /dev/dri
 
 # services:
 #   proxy:
@@ -22,17 +22,17 @@ services:
 #     networks:
 #         - proxy
 
-  veia-api:
-    image: jefaokpta/veia-api:1.5
-    command: ["java", "-Xms700m", "-Xmx700m", "-jar", "/veia-api.jar"]
-    networks:
-      - proxy
-    volumes:
-      - ./documents:/documents
-    environment:
-      - OLLAMA_URL=http://ollama:11434
-      - DOCUMENTS_PATH=./documents
-      - OPENAI_API_KEY=${OPENAI_API_KEY}
+#   veia-api:
+#     image: jefaokpta/veia-api:1.5
+#     command: ["java", "-Xms700m", "-Xmx700m", "-jar", "/veia-api.jar"]
+#     networks:
+#       - proxy
+#     volumes:
+#       - ./documents:/documents
+#     environment:
+#       - OLLAMA_URL=http://ollama:11434
+#       - DOCUMENTS_PATH=./documents
+#       - OPENAI_API_KEY=${OPENAI_API_KEY}
 
-networks:
-  proxy:
+# networks:
+#   proxy:
